@@ -14,7 +14,7 @@ class Add(Tk):
         self.iconbitmap(r'libico.ico')
         self.maxsize(500,417)
         self.minsize(500,417)
-        self.title('Ajouter un client')
+        self.title('Ajouter un Fournisseur')
         self.canvas = Canvas(width=500, height=417, bg='gray')
         self.canvas.pack()
         n = StringVar()
@@ -24,11 +24,13 @@ class Add(Tk):
 #verifying input
         def asi():
             if len(n.get()) < 1:
-                messagebox.showinfo("Oop's", "Ajouter le nom svp")
+                messagebox.showinfo("Oop's", "Ajouter votre nom svp")
             elif len(p.get()) < 1:
-                messagebox.showinfo("Oop's","Ajouter numéro de téléphone svp")
+                messagebox.showinfo("Oop's","Ajouter votre téléphone svp")
             elif len(a.get()) < 1:
-                messagebox.showinfo("Oop's", "Ajouter L'addresse svp")
+                messagebox.showinfo("Oop's", "Please Enter Your Address")
+            elif len(e.get()) < 1:
+                messagebox.showinfo("Oop's", "Ajouter votre email svp")
             else:
                 try:
                     self.conn = mysql.connector.connect(host='localhost',
@@ -40,19 +42,19 @@ class Add(Tk):
                     pn1 = p.get()
                     add1 = a.get()
                     email = e.get()
-                    self.myCursor.execute("Insert into student(name,phone_number,address, email) values (%s,%s,%s,%s)",[name1,pn1,add1, email])
+                    self.myCursor.execute("Insert into provider(name,telephone,address, email) values (%s,%s,%s,%s)",[name1,pn1,add1,email])
                     self.conn.commit()
-                    messagebox.showinfo("Done","Le Client a été ajouter avec succes")
-                    ask = messagebox.askyesno("Confirm","Voullez vous ajouter un autre client?")
+                    messagebox.showinfo("Done","Fournisseur ajouter avec succes")
+                    ask = messagebox.askyesno("Confirm","Voullez vous inséré un autre fournisseur?")
                     if ask:
                      self.destroy()
-                     os.system('%s %s' % (py, 'Add_Student.py'))
+                     os.system('%s %s' % (py, 'Add_Provider.py'))
                     else:
                      self.destroy()
                      self.myCursor.close()
                      self.conn.close()
                 except Error:
-                    messagebox.showerror("Error","Erreur essayez plus tard s'il vous plaît")
+                    messagebox.showerror("Error","Erreur")
 
         # label and input box
         Label(self, text='Student Details',bg='gray', fg='white', font=('Courier new', 25, 'bold')).pack()
@@ -62,9 +64,9 @@ class Add(Tk):
         Entry(self, textvariable=p, width=30).place(x=200, y=132)
         Label(self, text='Address:',bg='gray', font=('Courier new', 10, 'bold')).place(x=70, y=180)
         Entry(self, textvariable=a, width=30).place(x=200, y=182)
-        Label(self, text='Email:',bg='gray', font=('Courier new', 10, 'bold')).place(x=70, y=230)
+        Label(self, text='Email:',bg='gray', font=('Courier new', 10, 'bold')).place(x=70, y=220)
         Entry(self, textvariable=e, width=30).place(x=200, y=232)
 
-        Button(self, text="Submit",width = 15,command=asi).place(x=230, y=280)
+        Button(self, text="Submit",width = 15,command=asi).place(x=230, y=270)
 
 Add().mainloop()

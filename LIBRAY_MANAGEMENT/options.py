@@ -31,6 +31,9 @@ class MainWin(Tk):
         def a_b():
             os.system('%s %s' % (py, 'Add_Books.py'))
 
+        def a_c():
+            os.system('%s %s' % (py, 'Add_Category.py'))
+
         def r_b():
             os.system('%s %s' % (py, 'remove_book.py'))
 
@@ -61,6 +64,11 @@ class MainWin(Tk):
             os.system('%s %s' % (py, 'Reg.py'))
         def rem_user():
             os.system('%s %s' % (py, 'Rem.py'))
+
+        def add_cat():
+            os.system('%s %s' % (py, 'Add_Category.py'))
+        def add_fou():
+            os.system('%s %s' % (py, 'Add_Provider.py'))
         def sest():
             os.system('%s %s' % (py,'Search_Student.py'))
         def adbk():
@@ -90,16 +98,18 @@ class MainWin(Tk):
         ttk.Style().configure("Treeview",font=('Times new Roman',15))
 
         list1 = Menu(self)
-        list1.add_command(label="Élève", command=a_s)
+        list1.add_command(label="Client", command=a_s)
         list1.add_command(label="Livre", command=a_b)
 
         list3 = Menu(self)
         list3.add_command(label = "Ajouter un utilisateur",command = add_user)
         list3.add_command(label = "Supprimer l'utilisateur",command = rem_user)
+        list3.add_command(label="Fournisseur", command=add_fou)
+        list3.add_command(label= "Ajouter Category", command = add_cat)
 
 
-        self.mymenu.add_cascade(label='Add', menu=list1)
-        self.mymenu.add_cascade(label = 'Admin Tools', menu = list3)
+        self.mymenu.add_cascade(label='Ajouter', menu=list1)
+        self.mymenu.add_cascade(label = "Les outils d'administration ", menu = list3)
 
         self.config(menu=self.mymenu)
 
