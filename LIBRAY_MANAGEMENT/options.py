@@ -1,9 +1,10 @@
 from tkinter import *
+import tkinter as tk
 from tkinter import messagebox
 import os
 import sys
 from tkinter import ttk
-
+from PIL import ImageTk, Image
 import mysql.connector
 from mysql.connector import Error
 
@@ -15,8 +16,21 @@ class MainWin(Tk):
         super().__init__()
         self.iconbitmap(r'libico.ico')
         self.configure(bg='gray')
+        image = ImageTk.PhotoImage(file='index.jpg')
         self.canvas = Canvas(width=1366, height=768, bg='gray')
+        self.canvas.create_image(1366, 768, image=image, anchor= NW)
         self.canvas.pack()
+
+        #window = tk.Toplevel()
+        #window.title("Join")
+        #window.geometry("300x300")
+        #window.configure(background='grey')
+        #img = ImageTk.PhotoImage(Image.open('index.jpg'))
+        #panel = tk.Label(window, image=img)
+        #panel.pack(side="bottom", fill="both", expand="yes")
+        #window.mainloop()
+
+
         self.maxsize(1320, 768)
         self.minsize(1320,768)
         self.state('zoomed')
@@ -174,6 +188,7 @@ class MainWin(Tk):
                         self.destroy()
                         os.system('%s %s' % (py, 'Reg.py'))
                 else:
+
                     #label and input box
                     self.label3 = Label(self, text='SYSTÈME DE GESTION DE LA BIBLIOTHÈQUE',fg='black',bg="gray" ,font=('Courier new', 30, 'bold'))
                     self.label3.place(x=350, y=22)
