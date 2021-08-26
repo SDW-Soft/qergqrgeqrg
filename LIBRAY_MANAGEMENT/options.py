@@ -57,8 +57,8 @@ class MainWin(Tk):
         def ib():
             os.system('%s %s' % (py, 'issueTable.py'))
 
-        def ret():
-            os.system('%s %s' % (py, 'ret.py'))
+        #def ret():
+        #    os.system('%s %s' % (py, 'ret.py'))
 
         def sea():
             os.system('%s %s' % (py,'Search.py'))
@@ -204,10 +204,10 @@ class MainWin(Tk):
                     self.brt = Button(self, text='Trouve', width=15, font=('arial', 10),command = ent).place(x=1000, y=150)
                     self.label6 = Label(self, text="INFORMATIONS DÉTAILS",bg="gray",  font=('Courier new', 15, 'underline', 'bold'))
                     self.label6.place(x=560, y=300)
-                    self.button = Button(self, text='Rechercher un étudiant', width=25, font=('Courier new', 10), command=sest).place(x=240,y=250)
-                    self.button = Button(self, text='Rechercher un livre', width=25, font=('Courier new', 10), command=sea).place(x=520,y=250)
+                    self.button = Button(self, text='Rechercher un Client', width=25, font=('Courier new', 10), command=sest).place(x=240,y=250)
+                    self.button = Button(self, text='Rechercher un Livre', width=25, font=('Courier new', 10), command=sea).place(x=520,y=250)
                     self.brt = Button(self, text="émettre livre", width=15, font=('Courier new', 10), command=ib).place(x=800, y=250)
-                    self.brt = Button(self, text="Livre de retour", width=15, font=('Courier new', 10), command=ret).place(x=1000, y=250)
+                    #self.brt = Button(self, text="Livre de retour", width=15, font=('Courier new', 10), command=ret).place(x=1000, y=250)
                     self.brt = Button(self, text="SE DÉCONNECTER", width=15,bg="red", font=('Courier new', 10), command=log).place(x=1150, y=105)
             except Error:
                 messagebox.showerror("Error", "Quelque chose ne va pas")

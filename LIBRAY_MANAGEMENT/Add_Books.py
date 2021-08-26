@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import messagebox, ttk
+from tkcalendar import Calendar,DateEntry
 import mysql.connector
 from mysql.connector import Error
 import os
@@ -22,6 +23,7 @@ class Add(Tk):
         c = StringVar()
         pa = StringVar()
         pv = StringVar()
+        e = StringVar()
         q = IntVar()
         #verifying Input
         def b_q():
@@ -41,7 +43,7 @@ class Add(Tk):
                         id=row[0]
                     print(id)
                     self.myCursor = self.conn.cursor()
-                    self.myCursor.execute("Insert into book(name,author,availability, buy, sell, category_id) values (%s,%s,%s,%s,%s,%s)",[b.get(),c.get(),q.get(),pa.get(), pv.get(), int(id)])
+                    self.myCursor.execute("Insert into book(name,author,availability, buy, sell, category_id, edition) values (%s,%s,%s,%s,%s,%s,%s)",[b.get(),c.get(),q.get(),pa.get(), pv.get(), int(id), e.get()])
                     self.conn.commit()
                     messagebox.showinfo('Info', 'Le livre a été ajouter avec succes')
                     ask = messagebox.askyesno("Confirm", "Voullez vous inséré un autre livre?")
@@ -81,6 +83,8 @@ class Add(Tk):
         Entry(self, textvariable=pv, width=30).place(x=170, y=322)
         Label(self, text='Quantite:',bg='gray',fg='black', font=('Courier new', 10, 'bold')).place(x=60, y=370)
         Entry(self, textvariable=q, width=30).place(x=170, y=372)
+        Label(self, text='Date Edition:',bg='gray',fg='black', font=('Courier new', 10, 'bold')).place(x=60, y=420)
+        DateEntry(self, textvariable=e, width=30).place(x=170, y=422)
 
-        Button(self, text="Submit", command=b_q).place(x=245, y=420)
+        Button(self, text="Submit", command=b_q).place(x=245, y=470)
 Add().mainloop()
