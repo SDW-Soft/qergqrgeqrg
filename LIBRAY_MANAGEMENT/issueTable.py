@@ -15,7 +15,7 @@ class issue(Tk):
         self.title('Library Admisintration')
         self.maxsize(440, 300)
 
-        self.canvas = Canvas(width=1366, height=768, bg='gray')
+        self.canvas = Canvas(width=1366, height=768, bg='#e5e5e5')
         self.canvas.pack()
         c = StringVar()
         d = StringVar()
@@ -62,10 +62,10 @@ class issue(Tk):
                     messagebox.showerror("Error", "Something goes wrong")
                     
 #label and input box
-        Label(self, text='Book Issuing',bg = 'gray', font=('Courier new', 24)).place(x=135, y=40)
-        Label(self, text='Book ID:',bg = 'gray', font=('Courier new', 15), fg='black').place(x=55, y=100)
+        Label(self, text='Vent un livre',bg = '#e5e5e5', font=('Courier new', 24)).place(x=135, y=40)
+        Label(self, text='Book ID:',bg = '#e5e5e5', font=('Courier new', 15), fg='black').place(x=55, y=100)
         Entry(self, textvariable=c, width=40).place(x=160, y=106)
-        Label(self, text='Student ID:',bg = 'gray', font=('Courier new', 15), fg='black').place(x=20, y=150)
+        Label(self, text='Client ID:',bg = '#e5e5e5', font=('Courier new', 15), fg='black').place(x=20, y=150)
         Entry(self, textvariable=d, width=40).place(x=160, y=158)
-        Button(self, text="ISSUE", width=20, command=isb).place(x=200, y=200)
+        Button(self, text="Vent", bg="#fca311", width=20, command=isb).place(x=200, y=200)
 issue().mainloop()

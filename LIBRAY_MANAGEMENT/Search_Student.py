@@ -14,11 +14,11 @@ class Search(Tk):
         self.title("Recherche Client")
         self.maxsize(1000, 800)
         self.minsize(1000, 800)
-        self.canvas = Canvas(width=1366, height=768, bg='gray')
+        self.canvas = Canvas(width=1366, height=768, bg='#e5e5e5')
         self.canvas.pack()
         self.iconbitmap(r'libico.ico')
-        l1=Label(self,text="Search Student",bg='gray', font=("Courier new",20,'bold')).place(x=290,y=40)
-        l = Label(self, text="Search By",bg='gray', font=("Courier new", 15, 'bold')).place(x=180, y=100)
+        l1=Label(self,text="Search Student",bg='#e5e5e5', font=("Courier new",20,'bold')).place(x=290,y=40)
+        l = Label(self, text="Search By",bg='#e5e5e5', font=("Courier new", 15, 'bold')).place(x=180, y=100)
         n = StringVar()
         p = StringVar()
         a = StringVar()
@@ -110,15 +110,15 @@ class Search(Tk):
 
 
 
-        self.b= Button(self,text="Rechercher",width=10,font=("Courier new",8,'bold'),command= ge )
+        self.b= Button(self,text="Rechercher", bg="#fca311" ,width=10,font=("Courier new",8,'bold'),command= ge )
         self.b.id="search"
         self.b.place(x=300,y=170)
 
-        self.c= Button(self,text="Modifier",width=10,font=("Courier new",8,'bold'),command= ge )
+        self.c= Button(self,text="Modifier", bg="#fca311", width=10,font=("Courier new",8,'bold'),command= ge )
         self.c.id = "update"
         self.c.place(x=410,y=170)
         self.c.config(state="disabled")
-        self.d= Button(self,text="Supprimer", width=10,font=("Courier new",8,'bold'),command= ge )
+        self.d= Button(self,text="Supprimer", bg="#fca311", width=10,font=("Courier new",8,'bold'),command= ge )
         self.d.id="delete"
         self.d.place(x=510,y=170)
         self.d.config(state="disabled")
@@ -127,7 +127,7 @@ class Search(Tk):
         self.combo.place(x = 310, y = 105)
         self.entry = Entry(self,textvariable=f,width=43)
         self.entry.place(x=310,y=145)
-        self.la = Label(self, text="Enter",bg = 'gray', font=("Courier new", 15, 'bold')).place(x=180, y=140)
+        self.la = Label(self, text="Enter",bg = '#e5e5e5', font=("Courier new", 15, 'bold')).place(x=180, y=140)
 
         def handle(event):
             if self.listTree.identify_region(event.x,event.y) == "separator":
@@ -163,19 +163,19 @@ class Search(Tk):
         ttk.Style().configure("Treeview", font=('Times new Roman', 15))
         self.listTree.bind('<ButtonRelease-1>', selectItem)
 
-        Label(self, text='Student Details', bg='gray', fg='white', font=('Courier new', 20, 'bold')).place(x=70,y=490)
-        Label(self, text='Name:', bg='gray', font=('Courier new', 10, 'bold')).place(x=70, y=532)
+        Label(self, text='Student Details', bg='#e5e5e5', fg='white', font=('Courier new', 20, 'bold')).place(x=70,y=490)
+        Label(self, text='Name:', bg='#e5e5e5', font=('Courier new', 10, 'bold')).place(x=70, y=532)
         Entry(self, textvariable=n, width=30).place(x=200, y=534)
-        Label(self, text='Phone Number:', bg='gray', font=('Courier new', 10, 'bold')).place(x=70, y=580)
+        Label(self, text='Phone Number:', bg='#e5e5e5', font=('Courier new', 10, 'bold')).place(x=70, y=580)
         Entry(self, textvariable=p, width=30).place(x=200, y=582)
-        Label(self, text='Address:', bg='gray', font=('Courier new', 10, 'bold')).place(x=70, y=630)
+        Label(self, text='Address:', bg='#e5e5e5', font=('Courier new', 10, 'bold')).place(x=70, y=630)
         Entry(self, textvariable=a, width=30).place(x=200, y=632)
-        Label(self, text='Email:', bg='gray', font=('Courier new', 10, 'bold')).place(x=70, y=680)
+        Label(self, text='Email:', bg='#e5e5e5', font=('Courier new', 10, 'bold')).place(x=70, y=680)
         Entry(self, textvariable=e, width=30).place(x=200, y=682)
-        Label(self, text='Id:', bg='gray', font=('Courier new', 10, 'bold')).place(x=70, y=730)
+        Label(self, text='Id:', bg='#e5e5e5', font=('Courier new', 10, 'bold')).place(x=70, y=730)
         Entry(self, textvariable=id, width=30).place(x=200, y=732)
 
-        Button(self, text="Submit", width=15, command=asi).place(x=230, y=780)
+        Button(self, text="Submit", bg="#fca311", width=15, command=asi).place(x=230, y=780)
         conn = mysql.connector.connect(host='localhost',
                                        database='library',
                                        user='root',

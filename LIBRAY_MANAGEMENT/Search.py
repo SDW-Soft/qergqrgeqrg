@@ -14,12 +14,9 @@ class Search(Tk):
         self.title("Rechercher un livre")
         self.maxsize(1500, 950)
         self.minsize(1500, 950)
-        self.canvas = Canvas(width=1500, height=950, bg='gray')
+        self.canvas = Canvas(width=1500, height=950, bg='#e5e5e5')
         self.canvas.pack()
         self.iconbitmap(r'libico.ico')
-        l1=Label(self,text="Search Library",bg='gray', font=("Courier new",20,'bold')).place(x=290,y=20)
-        l = Label(self, text="Search By",bg='gray', font=("Courier new", 15, 'bold')).place(x=60, y=96)
-
         a = StringVar()
         book = StringVar()
         cat = StringVar()
@@ -70,7 +67,7 @@ class Search(Tk):
                                          user='root',
                                          password='')
                     self.mycursor = self.conn.cursor()
-                    self.mycursor.execute("Select * from book where name LIKE %s",['%'+f.get()+'%'])
+                    self.mycursor.execute("Select b.*, c.name, c.id as cid from book b LEFT JOIN categories c ON c.id=b.category_id where b.name LIKE %s",['%'+f.get()+'%'])
                     self.pc = self.mycursor.fetchall()
                     if self.pc:
                         insert(self.pc)
@@ -85,7 +82,7 @@ class Search(Tk):
                                          user='root',
                                          password='')
                     self.mycursor = self.conn.cursor()
-                    self.mycursor.execute("Select * from book where author LIKE %s", ['%'+f.get()+'%'])
+                    self.mycursor.execute("Select b.*, c.name, c.id as cid from book b LEFT JOIN categories c ON c.id=b.category_id where b.author LIKE %s", ['%'+f.get()+'%'])
                     self.pc = self.mycursor.fetchall()
                     if self.pc:
                         insert(self.pc)
@@ -100,7 +97,7 @@ class Search(Tk):
                                          user='root',
                                          password='')
                     self.mycursor = self.conn.cursor()
-                    self.mycursor.execute("Select * from book where book_id LIKE %s", ['%'+f.get()+'%'])
+                    self.mycursor.execute("Select b.*, c.name, c.id as cid from book b LEFT JOIN categories c ON c.id=b.category_id where b.book_id = %s", [f.get()])
                     self.pc = self.mycursor.fetchall()
                     if self.pc:
                         insert(self.pc)
@@ -108,10 +105,15 @@ class Search(Tk):
                         messagebox.showinfo("Oop's","Either Book Id is incorrect or it is not available")
                 except Error:
                     messagebox.showerror("Error","Something goes wrong")
-        b=Button(self,text="Find",width=15,bg='gray',font=("Courier new",10,'bold'),command=ge).place(x=460,y=148)
-        c=ttk.Combobox(self,textvariable=g,values=["Book Name","Author Name","Book Id"],width=40,state="readonly").place(x = 180, y = 100)
-        en = Entry(self,textvariable=f,width=43).place(x=180,y=155)
-        la = Label(self, text="Enter",bg='gray', font=("Courier new", 15, 'bold')).place(x=100, y=150)
+        l1=Label(self,text="Rechercher dans la bibliotheque",bg='#e5e5e5', font=("Courier new",20,'bold')).place(x=350,y=20)
+        l = Label(self, text="Chercher avec",bg='#e5e5e5', font=("Courier new", 15, 'bold')).place(x=60, y=96)
+
+
+
+        b=Button(self,text="Find",width=15,bg='#fca311',font=("Courier new",10,'bold'),command=ge).place(x=1060,y=96)
+        c=ttk.Combobox(self,textvariable=g,values=["Book Name","Author Name","Book Id"],width=40,state="readonly").place(x = 780, y = 96)
+        en = Entry(self,textvariable=f,width=43).place(x=280,y=96)
+        la = Label(self, text="Enter",bg='#e5e5e5', font=("Courier new", 15, 'bold')).place(x=700, y=93)
 
         def selectItem(event):
             curItem = self.listTree.focus()
@@ -167,26 +169,27 @@ class Search(Tk):
 
         Label(self, text='').pack()
 
-        Label(self, text='Book Category:', bg='gray', fg='black', font=('Courier new', 10, 'bold')).place(x=60, y=540)
-        combobox = ttk.Combobox(self, textvariable=cat, values=results_for_combobox, width=40, state="readonly").place(x=160,
+        Label(self, text='Book Category:', bg='#e5e5e5', fg='black', font=('Courier new', 10, 'bold')).place(x=60, y=540)
+        combobox = ttk.Combobox(self, textvariable=cat, values=results_for_combobox, width=150, state="readonly").place(x=170,
                                                                                                             y=540)
 
-        Label(self, text='Book Details:', bg='gray', fg='black', font=('Courier new', 20, 'bold')).place(x=170, y=490)
+        Label(self, text='Book Details:', bg='#e5e5e5', fg='black', font=('Courier new', 20, 'bold')).place(x=170, y=490)
         Label(self, text='').pack()
-        Label(self, text='Titre:', bg='gray', fg='black', font=('Courier new', 10, 'bold')).place(x=60, y=590)
-        Entry(self, textvariable=book, width=30).place(x=170, y=592)
-        Label(self, text='Author:', bg='gray', fg='black', font=('Courier new', 10, 'bold')).place(x=60, y=640)
-        Entry(self, textvariable=author, width=30).place(x=170, y=642)
-        Label(self, text='Prix Achat:', bg='gray', fg='black', font=('Courier new', 10, 'bold')).place(x=60, y=690)
-        Entry(self, textvariable=pa, width=30).place(x=170, y=692)
-        Label(self, text='Prix Vente:', bg='gray', fg='black', font=('Courier new', 10, 'bold')).place(x=60, y=740)
-        Entry(self, textvariable=pv, width=30).place(x=170, y=742)
-        Label(self, text='Quantite:', bg='gray', fg='black', font=('Courier new', 10, 'bold')).place(x=60, y=790)
-        Entry(self, textvariable=qte, width=30).place(x=170, y=792)
-        Label(self, text='Date Edition:', bg='gray', fg='black', font=('Courier new', 10, 'bold')).place(x=60, y=840)
-        DateEntry(self, textvariable=edition, width=30).place(x=170, y=842)
+        Label(self, text='Titre:', bg='#e5e5e5', fg='black', font=('Courier new', 10, 'bold')).place(x=60, y=590)
+        Entry(self, textvariable=book, width=60).place(x=170, y=592)
+        Label(self, text='Author:', bg='#e5e5e5', fg='black', font=('Courier new', 10, 'bold')).place(x=60, y=640)
+        Entry(self, textvariable=author, width=60).place(x=170, y=642)
+        Label(self, text='Prix Achat:', bg='#e5e5e5', fg='black', font=('Courier new', 10, 'bold')).place(x=60, y=690)
+        Entry(self, textvariable=pa, width=60).place(x=170, y=692)
 
-        Button(self, text="Submit", command=b_q).place(x=245, y=890)
+        Label(self, text='Prix Vente:', bg='#e5e5e5', fg='black', font=('Courier new', 10, 'bold')).place(x=660, y=590)
+        Entry(self, textvariable=pv, width=48).place(x=800, y=590)
+        Label(self, text='Quantite:', bg='#e5e5e5', fg='black', font=('Courier new', 10, 'bold')).place(x=660, y=640)
+        Entry(self, textvariable=qte, width=48).place(x=800, y=640)
+        Label(self, text='Date Edition:', bg='#e5e5e5', fg='black', font=('Courier new', 10, 'bold')).place(x=660, y=690)
+        DateEntry(self, textvariable=edition, width=45).place(x=800, y=690)
+
+        Button(self, text="Submit", bg="#fca311", command=b_q, width=130).place(x=170, y=750)
 
         conn = mysql.connector.connect(host='localhost',
                                        database='library',
@@ -195,7 +198,6 @@ class Search(Tk):
         mycursor = conn.cursor()
         mycursor.execute("Select b.*, c.name, c.id as cid from book b LEFT JOIN categories c ON c.id=b.category_id")
         pc = mycursor.fetchall()
-        print(pc)
         if pc:
             insert(pc)
         else:
