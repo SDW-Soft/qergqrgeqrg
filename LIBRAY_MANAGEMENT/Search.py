@@ -60,7 +60,7 @@ class Search(Tk):
                 messagebox.showinfo('Error', 'First select a item')
             elif (len(f.get())) == 0:
                 messagebox.showinfo('Error', 'Enter the '+g.get())
-            elif g.get() == 'Book Name':
+            elif g.get() == 'Nom de livre':
                 try:
                     self.conn = mysql.connector.connect(host='localhost',
                                          database='library',
@@ -75,7 +75,7 @@ class Search(Tk):
                         messagebox.showinfo("Oop's","Either Book Name is incorrect or it is not available")
                 except Error:
                     messagebox.showerror("Error","Something goes wrong")
-            elif g.get() == 'Author Name':
+            elif g.get() == 'Author':
                 try:
                     self.conn = mysql.connector.connect(host='localhost',
                                          database='library',
@@ -90,7 +90,7 @@ class Search(Tk):
                         messagebox.showinfo("Oop's","Author Name not found")
                 except Error:
                     messagebox.showerror("Error","Something goes wrong")
-            elif g.get() == 'Book Id':
+            elif g.get() == 'Livre Id':
                 try:
                     self.conn = mysql.connector.connect(host='localhost',
                                          database='library',
@@ -110,8 +110,8 @@ class Search(Tk):
 
 
 
-        b=Button(self,text="Find",width=15,bg='#fca311',font=("Courier new",10,'bold'),command=ge).place(x=1060,y=96)
-        c=ttk.Combobox(self,textvariable=g,values=["Book Name","Author Name","Book Id"],width=40,state="readonly").place(x = 780, y = 96)
+        b=Button(self,text="Rechercher",width=15,bg='#fca311',font=("Courier new",10,'bold'),command=ge).place(x=1060,y=96)
+        c=ttk.Combobox(self,textvariable=g,values=["Nom de livre","Author","Livre Id"],width=40,state="readonly").place(x = 780, y = 96)
         en = Entry(self,textvariable=f,width=43).place(x=280,y=96)
         la = Label(self, text="Enter",bg='#e5e5e5', font=("Courier new", 15, 'bold')).place(x=700, y=93)
 
@@ -130,18 +130,18 @@ class Search(Tk):
             cat.set(idx['values'][6])
 
 
-        self.listTree = ttk.Treeview(self, height=13,columns=('Book Name', 'Book Author', 'Availability', 'Prix Achat', 'Prix Vente', 'Date Edition', 'Category'))
+        self.listTree = ttk.Treeview(self, height=13,columns=('Nom de livre', 'Author', 'Quantité', 'Prix Achat', 'Prix Vente', 'Date Edition', 'Category'))
         self.vsb = ttk.Scrollbar(self,orient="vertical",command=self.listTree.yview)
         self.hsb = ttk.Scrollbar(self,orient="horizontal",command=self.listTree.yview)
         self.listTree.configure(yscrollcommand=self.vsb.set)
         self.listTree.heading("#0", text='Book ID', anchor='center')
         self.listTree.column("#0", width=120, anchor='center')
-        self.listTree.heading("Book Name", text='Book Name')
-        self.listTree.column("Book Name", width=200, anchor='center')
-        self.listTree.heading("Book Author", text='Book Author')
-        self.listTree.column("Book Author", width=200, anchor='center')
-        self.listTree.heading("Availability", text='Availability')
-        self.listTree.column("Availability", width=200, anchor='center')
+        self.listTree.heading("Nom de livre", text='Nom de livre')
+        self.listTree.column("Nom de livre", width=200, anchor='center')
+        self.listTree.heading("Author", text='Author')
+        self.listTree.column("Author", width=200, anchor='center')
+        self.listTree.heading("Quantité", text='Quantité')
+        self.listTree.column("Quantité", width=200, anchor='center')
         self.listTree.heading("Prix Achat", text='Prix Achat')
         self.listTree.column("Prix Achat", width=200, anchor='center')
         self.listTree.heading("Prix Vente", text='Prix Vente')
@@ -169,11 +169,11 @@ class Search(Tk):
 
         Label(self, text='').pack()
 
-        Label(self, text='Book Category:', bg='#e5e5e5', fg='black', font=('Courier new', 10, 'bold')).place(x=60, y=540)
+        Label(self, text='Categorie de livre:', bg='#e5e5e5', fg='black', font=('Courier new', 10, 'bold')).place(x=60, y=540)
         combobox = ttk.Combobox(self, textvariable=cat, values=results_for_combobox, width=150, state="readonly").place(x=170,
                                                                                                             y=540)
 
-        Label(self, text='Book Details:', bg='#e5e5e5', fg='black', font=('Courier new', 20, 'bold')).place(x=170, y=490)
+        Label(self, text='Livre information', bg='#e5e5e5', fg='black', font=('Courier new', 20, 'bold')).place(x=170, y=490)
         Label(self, text='').pack()
         Label(self, text='Titre:', bg='#e5e5e5', fg='black', font=('Courier new', 10, 'bold')).place(x=60, y=590)
         Entry(self, textvariable=book, width=60).place(x=170, y=592)

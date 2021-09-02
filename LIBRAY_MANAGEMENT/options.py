@@ -78,6 +78,10 @@ class MainWin(Tk):
             os.system('%s %s' % (py, 'Reg.py'))
         def rem_user():
             os.system('%s %s' % (py, 'Rem.py'))
+        def rem_book():
+            os.system('%s %s' % (py, 'Rem_Book.py'))
+        def rem_client():
+            os.system('%s %s' % (py, 'Rem_Client.py'))
 
         def add_cat():
             os.system('%s %s' % (py, 'Add_Category.py'))
@@ -97,7 +101,7 @@ class MainWin(Tk):
         self.listTree.configure(yscrollcommand=self.vsb.set,xscrollcommand=self.hsb.set)
         self.listTree.heading("#0", text='ID')
         self.listTree.column("#0", width=50,minwidth=50,anchor='center')
-        self.listTree.heading("Client", text='Student')
+        self.listTree.heading("Client", text='Client')
         self.listTree.column("Client", width=200, minwidth=200,anchor='center')
         self.listTree.heading("Livre", text='Book')
         self.listTree.column("Livre", width=200, minwidth=200,anchor='center')
@@ -120,6 +124,8 @@ class MainWin(Tk):
         list3.add_command(label = "Supprimer l'utilisateur",command = rem_user)
         list3.add_command(label="Fournisseur", command=add_fou)
         list3.add_command(label= "Ajouter Category", command = add_cat)
+        list3.add_command(label="Supprimer un livre", command=rem_book)
+        list3.add_command(label="Supprimer un client", command=rem_client)
 
 
         self.mymenu.add_cascade(label='Ajouter', menu=list1)

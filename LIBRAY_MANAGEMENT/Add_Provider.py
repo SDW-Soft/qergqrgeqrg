@@ -15,7 +15,7 @@ class Add(Tk):
         self.maxsize(500,417)
         self.minsize(500,417)
         self.title('Ajouter un Fournisseur')
-        self.canvas = Canvas(width=500, height=417, bg='gray')
+        self.canvas = Canvas(width=500, height=417, bg='#e5e5e5')
         self.canvas.pack()
         n = StringVar()
         p = StringVar()
@@ -57,16 +57,19 @@ class Add(Tk):
                     messagebox.showerror("Error","Erreur")
 
         # label and input box
-        Label(self, text='Student Details',bg='gray', fg='white', font=('Courier new', 25, 'bold')).pack()
-        Label(self, text='Name:',bg='gray', font=('Courier new', 10, 'bold')).place(x=70, y=82)
+        Label(self, text='').pack()
+        Label(self, text='Details de Fournisseur', bg='#e5e5e5', fg='black', font=('Courier new', 20, 'bold')).place(x=45,
+                                                                                                                   y=40)
+        Label(self, text='').pack()
+        Label(self, text='Nom:',bg='#e5e5e5', font=('Courier new', 10, 'bold')).place(x=70, y=82)
         Entry(self, textvariable=n, width=30).place(x=200, y=84)
-        Label(self, text='Phone Number:',bg='gray', font=('Courier new', 10, 'bold')).place(x=70, y=130)
+        Label(self, text='Numéro de téléphone:',bg='#e5e5e5', font=('Courier new', 10, 'bold')).place(x=70, y=130)
         Entry(self, textvariable=p, width=30).place(x=200, y=132)
-        Label(self, text='Address:',bg='gray', font=('Courier new', 10, 'bold')).place(x=70, y=180)
+        Label(self, text='Adresse:',bg='#e5e5e5', font=('Courier new', 10, 'bold')).place(x=70, y=180)
         Entry(self, textvariable=a, width=30).place(x=200, y=182)
-        Label(self, text='Email:',bg='gray', font=('Courier new', 10, 'bold')).place(x=70, y=220)
+        Label(self, text='Email:',bg='#e5e5e5', font=('Courier new', 10, 'bold')).place(x=70, y=220)
         Entry(self, textvariable=e, width=30).place(x=200, y=232)
 
-        Button(self, text="Submit",width = 15,command=asi).place(x=230, y=270)
+        Button(self, text="Envoyer", bg="#fca311",width = 15,command=asi).place(x=230, y=270)
 
 Add().mainloop()
